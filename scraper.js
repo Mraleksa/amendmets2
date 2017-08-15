@@ -55,7 +55,7 @@ var changeLength = data.getJSON().data.changes.length;
 		
 	}
 			
-console.log(data.getJSON().data.tender_id+": "+changeLength+": "+upDate+" "+downDate)	
+console.log(data.getJSON().data.tender_id+": "+up+": "+upDate+": "+downDate)	
 	if(data.getJSON().data.changes[0].rationaleTypes[0]=="itemPriceVariation")
 		{
 			var first = data.getJSON().data.changes[0].dateSigned;
@@ -108,7 +108,7 @@ console.log(data.getJSON().data.tender_id+": "+changeLength+": "+upDate+" "+down
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<3) {
+		if (p<6) {
 		//piv ();
 		setTimeout(function() {piv ();},15000);
 		}	
