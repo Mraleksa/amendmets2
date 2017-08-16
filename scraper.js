@@ -69,6 +69,7 @@ console.log(changeLength+"-"+upDate);
 	var lotIdContracts = data.getJSON().data.items[0].relatedLot;
 	var dateSigned = data.getJSON().data.dateSigned;
 	var amount = data.getJSON().data.value.amount;	
+	var region = data.getJSON().data.procuringEntity.address.region;	
 	
 	
 	//save
@@ -87,15 +88,15 @@ console.log(changeLength+"-"+upDate);
 		}
 		})
 		//saveEnd
-	/*
+	
 	db.serialize(function() {	
-	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEST,tender_id TEXT,id TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,up INT,down INT)");
-	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
-	statement.run(item.dateModified,dateSigned,first,tender_id,id,data.getJSON().data.tenderID,data.getJSON().data.procuringEntity.name,data.getJSON().data.numberOfBids,startAmount,amount,data.getJSON().data.items[0].classification.description,up,down);
+	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEST,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,upDate TEXT,downDate TEXT)");
+	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
+	statement.run(item.dateModified,dateSigned,first,data.getJSON().data.tenderID,data.getJSON().data.procuringEntity.name,data.getJSON().data.numberOfBids,startAmount,amount,data.getJSON().data.items[0].classification.description,region,up,down);
 	//console.log(change);
 	statement.finalize();
 	});
-	*/
+	
 	
 	.catch(function  (error) {								
 	});  
