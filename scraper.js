@@ -84,9 +84,9 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	
 	//////////SQLite//////////////
 	db.serialize(function() {	
-	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT)");
+	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,upDate TEXT)");
 	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
-	statement.run(item.dateModified,dateSigned,first,data.getJSON().data.tenderID,data.getJSON().data.procuringEntity.name,data.getJSON().data.numberOfBids,startAmount,amount,data.getJSON().data.items[0].classification.description,region,up,down,downDate);
+	statement.run(item.dateModified,dateSigned,first,data.getJSON().data.tenderID,data.getJSON().data.procuringEntity.name,data.getJSON().data.numberOfBids,startAmount,amount,data.getJSON().data.items[0].classification.description,region,up,down,upDate);
 	//console.log(change);
 	statement.finalize();
 	});
