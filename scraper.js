@@ -57,7 +57,7 @@ if(up>0){
 		
 	}
 			
-console.log(changeLength+"-"+upDate);
+//console.log(changeLength+"-"+upDate);
 	
 	if(data.getJSON().data.changes[0].rationaleTypes[0]=="itemPriceVariation")
 		{
