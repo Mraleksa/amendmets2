@@ -38,7 +38,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 
 	//if(up>0){
 	
-		var upDate="";var downDate="";
+		var upDate=" ";var downDate=" ";
 		for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
 			upDate = upDate+data.getJSON().data.changes[p].dateSigned+";"
@@ -86,7 +86,21 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	db.serialize(function() {	
 	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT)");
 	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
-	statement.run(item.dateModified,dateSigned,first,data.getJSON().data.tenderID,data.getJSON().data.procuringEntity.name,data.getJSON().data.numberOfBids,startAmount,amount,data.getJSON().data.items[0].classification.description,region,up,down,downDate);
+	statement.run(
+	item.dateModified,
+	dateSigned,
+	first,
+	data.getJSON().data.tenderID,
+	data.getJSON().data.procuringEntity.name,
+	data.getJSON().data.numberOfBids,
+	startAmount,
+	amount,
+	data.getJSON().data.items[0].classification.description,
+	region,
+	up,
+	down,
+	downDate
+	);
 	//console.log(change);
 	statement.finalize();
 	});
