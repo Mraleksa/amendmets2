@@ -5,7 +5,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 
  
-var start =  "2017-03-27T16:45:30.220069+03:00"
+var start =  "2017-03-27T18:23:46.523283+03:00"
 console.log("старт: "+start); 
 var p=0; var p2=0;
 
@@ -119,7 +119,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<4) {
+		if (p<10) {
 		//piv ();
 		setTimeout(function() {piv ();},15000);
 		}	
