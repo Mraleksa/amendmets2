@@ -38,7 +38,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 
 	//if(up>0){
 	
-		var upDates=";";var downDate=";";
+		var upDates="";var downDate="";
 		for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
 			upDates = upDates+data.getJSON().data.changes[p].dateSigned+";"
