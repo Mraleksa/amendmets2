@@ -22,32 +22,24 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		dataset.forEach(function(item) {
 		client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts/'+item.id})
 		.then(function (data) {	
-//////////SQLite//////////////
+
 //var change = data.getJSON().data.changes[data.getJSON().data.changes.length-1].rationaleTypes[0];
-var changeLength = data.getJSON().data.changes.length;
+	var changeLength = data.getJSON().data.changes.length;
 			
-
-			
-//console.log(changeLength)		
-			
-			
-		
-
-
-	var up=0;var down=0;
-	for (var p = 0; p < changeLength; p++) {
+		var up=0;var down=0;
+		for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
 			up=up+1;
 		}
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="priceReduction"){
 			down=down+1;
 		}
-	}
+		}
 
-if(up>0){
+	if(up>0){
 	
-	var upDate="";var downDate="";
-	for (var p = 0; p < changeLength; p++) {
+		var upDate="";var downDate="";
+		for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
 			upDate = upDate+data.getJSON().data.changes[p].dateSigned+";"
 		}
@@ -72,8 +64,8 @@ if(up>0){
 	var region = data.getJSON().data.procuringEntity.address.region;	
 	
 	
-	//save
-	client.request({url: 'https://public.api.openprocurement.org/api/2.3/tenders/'+data.getJSON().data.tender_id})
+		//save
+		client.request({url: 'https://public.api.openprocurement.org/api/2.3/tenders/'+data.getJSON().data.tender_id})
 		.then(function (data) {
 		var startAmount;
 		if(data.getJSON().data.lots==undefined){
@@ -91,6 +83,7 @@ if(up>0){
 		}); 
 		//saveEnd
 	
+	//////////SQLite//////////////
 	db.serialize(function() {	
 	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEST,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,upDate TEXT,downDate TEXT)");
 	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
@@ -98,11 +91,7 @@ if(up>0){
 	//console.log(change);
 	statement.finalize();
 	});
-	}
-	
-	 
-	
-			
+	}		
 //////////SQLite//////////////	
 	})
 	.catch(function  (error) {
