@@ -80,8 +80,8 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		
 		//////////SQLite//////////////
 	db.serialize(function() {	
-	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT)");
-	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
+	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,upDate TEXT,downDate TEXT)");
+	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
 	statement.run(
 	item.dateModified,
 	dateSigned,
@@ -95,6 +95,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	region,
 	up,
 	down,
+	upDate,
 	downDate
 	);
 	statement.finalize();
