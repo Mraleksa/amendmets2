@@ -23,7 +23,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts/'+item.id})
 		.then(function (data) {	
 //////////SQLite//////////////
-var change = data.getJSON().data.changes[data.getJSON().data.changes.length-1].rationaleTypes[0];
+//var change = data.getJSON().data.changes[data.getJSON().data.changes.length-1].rationaleTypes[0];
 var changeLength = data.getJSON().data.changes.length;
 			
 
@@ -32,7 +32,7 @@ var changeLength = data.getJSON().data.changes.length;
 			
 			
 		
-//if(changeLength>0){
+
 
 	var up=0;var down=0;
 	for (var p = 0; p < changeLength; p++) {
@@ -43,6 +43,8 @@ var changeLength = data.getJSON().data.changes.length;
 			down=down+1;
 		}
 	}
+
+if(up>0){
 	
 	var upDate="";var downDate="";
 	for (var p = 0; p < changeLength; p++) {
@@ -55,7 +57,8 @@ var changeLength = data.getJSON().data.changes.length;
 		
 	}
 			
-console.log(upDate)	
+console.log(changeLength+"-"+upDate);
+	
 	if(data.getJSON().data.changes[0].rationaleTypes[0]=="itemPriceVariation")
 		{
 			var first = data.getJSON().data.changes[0].dateSigned;
@@ -67,22 +70,23 @@ console.log(upDate)
 	var dateSigned = data.getJSON().data.dateSigned;
 	var amount = data.getJSON().data.value.amount;	
 	
+	
+	//save
 	client.request({url: 'https://public.api.openprocurement.org/api/2.3/tenders/'+data.getJSON().data.tender_id})
 		.then(function (data) {
 		var startAmount;
 		if(data.getJSON().data.lots==undefined){
-		startAmount = data.getJSON().data.value.amount;
-		//console.log(startAmount)
+			startAmount = data.getJSON().data.value.amount;
 		}
 		else {
 		for (var i = 1; i <= data.getJSON().data.lots.length; i++) {
-		if(lotIdContracts==data.getJSON().data.lots[data.getJSON().data.lots.length-(i)].id){
-		startAmount =  data.getJSON().data.lots[data.getJSON().data.lots.length-(i)].value.amount
-		};			
-	   }
-	   
-	//console.log(startAmount)
-	}
+				if(lotIdContracts==data.getJSON().data.lots[data.getJSON().data.lots.length-(i)].id){
+				startAmount =  data.getJSON().data.lots[data.getJSON().data.lots.length-(i)].value.amount
+				};			
+			}
+		}
+		})
+		//saveEnd
 	/*
 	db.serialize(function() {	
 	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEST,tender_id TEXT,id TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,up INT,down INT)");
@@ -92,10 +96,10 @@ console.log(upDate)
 	statement.finalize();
 	});
 	*/
-	})
+	
 	.catch(function  (error) {								
 	});  
-	//}
+	}
 			
 //////////SQLite//////////////	
 	})
