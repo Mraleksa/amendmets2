@@ -47,10 +47,10 @@ var changeLength = data.getJSON().data.changes.length;
 	var upDate="";var downDate="";
 	for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
-			upDate = upDate+";"+data.getJSON().data.changes[p].dateSigned
+			upDate = upDate+data.getJSON().data.changes[p].dateSigned+";"
 		}
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="priceReduction"){
-			downDate = downDate+";"+data.getJSON().data.changes[p].dateSigned
+			downDate = downDate+data.getJSON().data.changes[p].dateSigned+";"
 		}
 		
 	}
