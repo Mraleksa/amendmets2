@@ -36,7 +36,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		}
 		}
 
-	//if(up>0){
+	if(up>0){
 	
 		var upDates="";var downDate="";
 		for (var p = 0; p < changeLength; p++) {
@@ -108,7 +108,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//////////saveEnd//////////////
 	
 	
-	//}		
+	}		
 	})
 	.catch(function  (error) {
 		//console.log("error_detale2")				
