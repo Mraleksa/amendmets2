@@ -55,7 +55,7 @@ var changeLength = data.getJSON().data.changes.length;
 		
 	}
 			
-console.log(data.getJSON().data.tender_id+": "+up+": "+upDate+": "+downDate)	
+console.log(up)	
 	if(data.getJSON().data.changes[0].rationaleTypes[0]=="itemPriceVariation")
 		{
 			var first = data.getJSON().data.changes[0].dateSigned;
@@ -108,7 +108,7 @@ console.log(data.getJSON().data.tender_id+": "+up+": "+upDate+": "+downDate)
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<6) {
+		if (p<4) {
 		//piv ();
 		setTimeout(function() {piv ();},15000);
 		}	
