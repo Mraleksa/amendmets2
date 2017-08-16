@@ -5,7 +5,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 
  
-var start =  "2017-03-27T18:23:46.523283+03:00"
+var start =  "2017-03-27T16:45:30.220069+03:00"
 console.log("старт: "+start); 
 var p=0; var p2=0;
 
@@ -23,9 +23,10 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts/'+item.id})
 		.then(function (data) {	
 
-//var change = data.getJSON().data.changes[data.getJSON().data.changes.length-1].rationaleTypes[0];
+	var change = data.getJSON().data.changes[data.getJSON().data.changes.length-1].rationaleTypes[0];
 	var changeLength = data.getJSON().data.changes.length;
-			
+	
+	if(change=="itemPriceVariation"){		
 		var up=0;var down=0;
 		for (var p = 0; p < changeLength; p++) {
 		if(data.getJSON().data.changes[p].rationaleTypes[0]=="itemPriceVariation"){
@@ -36,7 +37,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		}
 		}
 
-	if(up>0){
+	//if(up>0){
 	
 		var upDates="";var downDate="";
 		for (var p = 0; p < changeLength; p++) {
@@ -119,7 +120,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<10) {
+		if (p<4) {
 		//piv ();
 		setTimeout(function() {piv ();},15000);
 		}	
