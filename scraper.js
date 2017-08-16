@@ -63,7 +63,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	var region = data.getJSON().data.procuringEntity.address.region;	
 	
 	
-		//save
+		//////////save//////////////
 		client.request({url: 'https://public.api.openprocurement.org/api/2.3/tenders/'+data.getJSON().data.tender_id})
 		.then(function (data) {
 		var startAmount;
@@ -77,12 +77,8 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 				};			
 			}
 		}
-		})
-		.catch(function  (error) {									
-		}); 
-		//saveEnd
-	
-	//////////SQLite//////////////
+		
+		//////////SQLite//////////////
 	db.serialize(function() {	
 	db.run("CREATE TABLE IF NOT EXISTS data (dateModified TEXT,dateSigned TEXT,first TEXT,tenderID TEXT,procuringEntity TEXT,numberOfBids INT,startAmount INT,amount INT,cpv TEXT,region TEXT,up INT,down INT,downDate TEXT)");
 	var statement = db.prepare("INSERT INTO data VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)"); 	
@@ -101,11 +97,17 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 	down,
 	downDate
 	);
-	//console.log(change);
 	statement.finalize();
 	});
+	//////////SQLiteEnd//////////////
+	
+		})
+		.catch(function  (error) {									
+		}); 
+		//////////saveEnd//////////////
+	
+	
 	//}		
-//////////SQLite//////////////	
 	})
 	.catch(function  (error) {
 		//console.log("error_detale2")				
