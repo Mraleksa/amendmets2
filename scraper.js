@@ -120,7 +120,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<4) {
+		if (p<14) {
 		//piv ();
 		setTimeout(function() {piv ();},15000);
 		}	
