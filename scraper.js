@@ -87,6 +87,8 @@ if(up>0){
 			}
 		}
 		})
+		.catch(function  (error) {									
+		}); 
 		//saveEnd
 	
 	db.serialize(function() {	
@@ -96,11 +98,10 @@ if(up>0){
 	//console.log(change);
 	statement.finalize();
 	});
-	
-	
-	.catch(function  (error) {								
-	});  
 	}
+	
+	 
+	
 			
 //////////SQLite//////////////	
 	})
