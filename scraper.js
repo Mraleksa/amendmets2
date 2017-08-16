@@ -55,7 +55,7 @@ var changeLength = data.getJSON().data.changes.length;
 		
 	}
 			
-console.log(up)	
+console.log(upDate)	
 	if(data.getJSON().data.changes[0].rationaleTypes[0]=="itemPriceVariation")
 		{
 			var first = data.getJSON().data.changes[0].dateSigned;
