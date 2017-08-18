@@ -79,7 +79,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 			}
 		}
 		var numberOfBids;
-		if(data.getJSON().data.numberOfBids=="undefined"){numberOfBids = 1}
+		if(data.getJSON().data.numberOfBids!=="undefined"){numberOfBids = 1}
 		else {numberOfBids=data.getJSON().data.numberOfBids};
 		
 		//////////SQLite//////////////
