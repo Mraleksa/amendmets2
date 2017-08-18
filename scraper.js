@@ -5,7 +5,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 
  
-var start =  "2017-08-16T17:00:16.120702+03:00"
+var start =  "2017-08-16T16:00:16.120702+03:00"
 console.log("старт: "+start); 
 var p=0; var p2=0;
 
@@ -79,7 +79,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 			}
 		}
 		var numberOfBids;
-		if(data.getJSON().data.numberOfBids==""){numberOfBids = 1}
+		if(data.getJSON().data.numberOfBids=="undefined"){numberOfBids = 1}
 		else {numberOfBids=data.getJSON().data.numberOfBids};
 		
 		//////////SQLite//////////////
@@ -123,7 +123,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<10) {
+		if (p<5) {
 		//piv ();
 		setTimeout(function() {piv ();},20000);
 		}	
