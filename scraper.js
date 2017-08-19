@@ -5,7 +5,7 @@ var db = new sqlite3.Database("data.sqlite");
 
 
  
-var start =  "2017-03-06T15:10:07.044730+02:00"
+var start =  "2017-04-18T13:11:03.995878+03:00"
 console.log("старт: "+start); 
 var p=0; var p2=0;
 
