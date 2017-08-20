@@ -12,7 +12,7 @@ var p=0; var p2=0;
 db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
 
 var start = timeStart.dateModified
-console.log("старт: "+timeStart); 
+console.log("старт: "+start); 
 
 function piv(){  
 p++;
@@ -130,15 +130,15 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<5) {
-			setTimeout(function() {piv ();},10000);
+		if (p<10) {
+			setTimeout(function() {piv ();},12000);
 		}	
 		else {
 			console.log("stop"+": "+p2)
 			p=0;
 			p2++;
-			if (p2 < 3) {
-				setTimeout(function() {piv ();},20000);
+			if (p2 < 70) {
+				setTimeout(function() {piv ();},25000);
 			}
 			else {
 				console.log("STOP")
