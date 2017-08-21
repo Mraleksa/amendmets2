@@ -4,18 +4,21 @@ var sqlite3 = require("sqlite3").verbose();
 var db = new sqlite3.Database("data.sqlite");
 
 
- 
-//var start =  "2017-03-06T15:10:07.044730+02:00"
-//console.log("старт: "+start); 
-var p=0; var p2=0;
+var formatTime = d3.timeFormat("%Y-%m-%d");
+
 
 db.each("SELECT dateModified FROM data ORDER BY dateModified DESC LIMIT 1", function(err, timeStart) {
 
 var start = timeStart.dateModified
-console.log("старт: "+start); 
+var end  = formatTime(new Date());
+
+console.log("стар full: "+start); 
+
+
+console.log("старт: "+start.replace(/T.*/, "") +"конец: "+end); 
 
 function piv(){  
-p++;
+//p++;
 client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?offset='+start})
       .then(function (data) {
 		var dataset = data.getJSON().data;
@@ -130,30 +133,20 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 		//console.log("error_detale3")				
 	})
 	.then(function () {	
-		if (p<10) {
-			setTimeout(function() {piv ();},12000);
+	
+		if (start.replace(/T.*/, "") != end) {
+			setTimeout(function() {piv ();},15000);
 		}	
 		else {
-			console.log("stop"+": "+p2)
-			p=0;
-			p2++;
-			if (p2 < 50) {
-				setTimeout(function() {piv ();},25000);
-			}
-			else {
-				console.log("STOP")
-				}
-		//console.log(start.replace(/T.*/, ""))
-		}							
+			console.log("STOP")
+		}
+		
 		})
 	.catch( function (error) {
 		console.log("error")
 		piv ();
 	});   					
 }
-
-
-
 
 
 
