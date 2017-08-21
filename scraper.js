@@ -137,7 +137,7 @@ client.request({url: 'https://public.api.openprocurement.org/api/2.3/contracts?o
 			console.log("stop"+": "+p2)
 			p=0;
 			p2++;
-			if (p2 < 70) {
+			if (p2 < 50) {
 				setTimeout(function() {piv ();},25000);
 			}
 			else {
